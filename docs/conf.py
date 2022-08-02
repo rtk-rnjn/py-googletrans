@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Googletrans'
-copyright =  str(datetime.date.today().year) + ', SuHun Han (ssut)'
+copyright = f'{str(datetime.date.today().year)}, SuHun Han (ssut)'
 author = 'SuHun Han (ssut)'
 
 # The version info for the project you're documenting, acts as replacement for

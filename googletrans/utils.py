@@ -55,8 +55,7 @@ def legacy_format_json(original):
             # use slicing to extract those parts of the original string to be kept
             text = text[:p] + states[j][1] + text[nxt:]
 
-    converted = json.loads(text)
-    return converted
+    return json.loads(text)
 
 
 def get_items(dict_object):

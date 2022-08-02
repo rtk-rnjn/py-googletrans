@@ -89,8 +89,10 @@ class Translator:
             return data, r
 
         if self.raise_exception:
-            raise Exception('Unexpected status code "{}" from {}'.format(
-                r.status_code, self.service_urls))
+            raise Exception(
+                f'Unexpected status code "{r.status_code}" from {self.service_urls}'
+            )
+
 
         DUMMY_DATA[0][0][0] = text
         return DUMMY_DATA, r
@@ -110,13 +112,10 @@ class Translator:
             14: 'see-also',
         }
 
-        extra = {}
-
-        for index, category in response_parts_name_mapping.items():
-            extra[category] = data[index] if (
-                index < len(data) and data[index]) else None
-
-        return extra
+        return {
+            category: data[index] if (index < len(data) and data[index]) else None
+            for index, category in response_parts_name_mapping.items()
+        }
 
     def translate(self, text, dest='en', src='auto', **kwargs):
         """Translate text from source language to destination language
@@ -187,7 +186,7 @@ class Translator:
         data, response = self._translate(text, dest, src, kwargs)
 
         # this code will be updated when the format is changed.
-        translated = ''.join([d[0] if d[0] else '' for d in data[0]])
+        translated = ''.join([d[0] or '' for d in data[0]])
 
         extra_data = self._parse_extra_data(data)
 
